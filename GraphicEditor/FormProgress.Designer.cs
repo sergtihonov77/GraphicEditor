@@ -37,7 +37,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Cursor = System.Windows.Forms.Cursors.Default;
-            this.buttonCancel.Location = new System.Drawing.Point(133, 79);
+            this.buttonCancel.Location = new System.Drawing.Point(126, 67);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 0;
@@ -49,7 +49,7 @@
             // 
             this.labelProcess.AutoSize = true;
             this.labelProcess.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelProcess.Location = new System.Drawing.Point(119, 19);
+            this.labelProcess.Location = new System.Drawing.Point(107, 9);
             this.labelProcess.Name = "labelProcess";
             this.labelProcess.Size = new System.Drawing.Size(127, 15);
             this.labelProcess.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             // progressBarInvert
             // 
-            this.progressBarInvert.Location = new System.Drawing.Point(12, 46);
+            this.progressBarInvert.Location = new System.Drawing.Point(12, 38);
             this.progressBarInvert.Name = "progressBarInvert";
             this.progressBarInvert.Size = new System.Drawing.Size(313, 23);
             this.progressBarInvert.TabIndex = 2;
@@ -74,14 +74,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 114);
+            this.ClientSize = new System.Drawing.Size(336, 102);
             this.ControlBox = false;
             this.Controls.Add(this.progressBarInvert);
             this.Controls.Add(this.labelProcess);
             this.Controls.Add(this.buttonCancel);
             this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormProgress";

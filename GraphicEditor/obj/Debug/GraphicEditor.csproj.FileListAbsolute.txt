@@ -2,9 +2,19 @@ c:\users\myx\documents\visual studio 2015\Projects\GraphicEditor\GraphicEditor\b
 c:\users\myx\documents\visual studio 2015\Projects\GraphicEditor\GraphicEditor\bin\Debug\GraphicEditor.exe
 c:\users\myx\documents\visual studio 2015\Projects\GraphicEditor\GraphicEditor\bin\Debug\GraphicEditor.pdb
 c:\users\myx\documents\visual studio 2015\Projects\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.csprojResolveAssemblyReference.cache
-c:\users\myx\documents\visual studio 2015\Projects\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.Form1.resources
 c:\users\myx\documents\visual studio 2015\Projects\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.Properties.Resources.resources
 c:\users\myx\documents\visual studio 2015\Projects\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.csproj.GenerateResource.Cache
 c:\users\myx\documents\visual studio 2015\Projects\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.exe
 c:\users\myx\documents\visual studio 2015\Projects\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.pdb
 C:\Users\MyX\Documents\Visual Studio 2015\Projects\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.FormProgress.resources
+C:\Users\MyX\Documents\Visual Studio 2015\Projects\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.FormMain.resources
+D:\Programming\С#\GraphicEditor\GraphicEditor\bin\Debug\GraphicEditor.exe.config
+D:\Programming\С#\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.exe
+D:\Programming\С#\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.pdb
+D:\Programming\С#\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.csprojResolveAssemblyReference.cache
+D:\Programming\С#\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.FormMain.resources
+D:\Programming\С#\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.FormProgress.resources
+D:\Programming\С#\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.Properties.Resources.resources
+D:\Programming\С#\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.csproj.GenerateResource.Cache
+D:\Programming\С#\GraphicEditor\GraphicEditor\bin\Debug\GraphicEditor.exe
+D:\Programming\С#\GraphicEditor\GraphicEditor\bin\Debug\GraphicEditor.pdb
