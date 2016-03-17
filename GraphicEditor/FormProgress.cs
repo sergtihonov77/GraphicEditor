@@ -13,52 +13,45 @@ namespace GraphicEditor
 {
     public partial class FormProgress : Form
     {
-        FormMain mainForm;
-        Bitmap  prevImg;
+        Form1 mainForm;
+        Bitmap inv, pre;
 
-        //Конструктор (сразу запускается обработка асинхронной операции инверсии с помощью backgroundWorker )
-        public FormProgress(Bitmap inn, FormMain mf)
+        public FormProgress(Bitmap inn)
         {
+            pre = inn;
             InitializeComponent();
 
-            prevImg = inn;
-            mainForm = mf;
-
-              if (!backgroundWorkerInvert.IsBusy)
-              {
-                  backgroundWorkerInvert.RunWorkerAsync();
-              }
+            if (!backgroundWorkerInvert.IsBusy)
+            {
+                backgroundWorkerInvert.RunWorkerAsync();
+            }
         }
 
-        //Инверсия с отбражением прогресса выполнения
+
         private void backgroundWorkerInvert_DoWork(object sender, DoWorkEventArgs e)
         {
-            int x;
-            int y;
-            ReaderWriterLock rw = new ReaderWriterLock();
-            rw.AcquireReaderLock(10000);
-            for (x = 0; x <= prevImg.Width - 1; x++)
-                { 
-                    if (backgroundWorkerInvert.CancellationPending)
-                    {
-                        e.Cancel = true;
-                        break;
-                    }
-                  
+            int process = 100;
+            int index = 1;
+            try
+            {
+                for (int i = 0; i < process; i++)
+                {
                     if (!backgroundWorkerInvert.CancellationPending)
                     {
-                        for (y = 0; y <= prevImg.Height - 1; y += 1)
-                        {
-                            Color oldColor = prevImg.GetPixel(x, y);
-                            Color newColor;
-                            newColor = Color.FromArgb(oldColor.A, 255 - oldColor.R, 255 - oldColor.G, 255 - oldColor.B);
-                            prevImg.SetPixel(x, y, newColor);
-                        }
-                        backgroundWorkerInvert.ReportProgress(x / 13);
+                        backgroundWorkerInvert.ReportProgress(index++ * 100 / process, string.Format("Process data {0}", i));
+                        //Thread.Sleep(300);
+                        inv = Invert(pre);
+
                     }
                 }
-                e.Result = prevImg;
-            rw.ReleaseLock();
+                
+            }
+            catch (Exception ex)
+            {
+                backgroundWorkerInvert.CancelAsync();
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void backgroundWorkerInvert_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -70,36 +63,22 @@ namespace GraphicEditor
 
         private void backgroundWorkerInvert_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-            {
-                MessageBox.Show("Process had been canceled.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                
-            }
-            else if (e.Error != null)
-            {
-                MessageBox.Show(e.Error.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                            
-                MessageBox.Show("Process had been completed.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                mainForm.pictureBoxMain.Image = (Bitmap)e.Result;
-            }
+            MessageBox.Show("Process had been completed.","Message",MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Form1 f1 = new Form1();
+            f1.bmp = inv;
             this.Close();
         }
 
-        //Обработка отмены инверсии
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            if (this.backgroundWorkerInvert.IsBusy && backgroundWorkerInvert.WorkerSupportsCancellation)
+            if (backgroundWorkerInvert.IsBusy)
             {
-                this.backgroundWorkerInvert.CancelAsync();
+                backgroundWorkerInvert.CancelAsync();
             }
             this.Close();
         }
 
-        //Инверсия в методе
-        /*public Bitmap Invert(Bitmap bitmap)
+        public Bitmap Invert(Bitmap bitmap)
         {
             int x;
             int y;
@@ -114,7 +93,6 @@ namespace GraphicEditor
                 }
             }
             return bitmap;
-        }*/
+        }
     }
-
 }

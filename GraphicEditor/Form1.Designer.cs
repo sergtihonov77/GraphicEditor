@@ -1,6 +1,6 @@
 ﻿namespace GraphicEditor
 {
-    partial class FormMain
+    partial class Form1
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.pictureBoxMain = new System.Windows.Forms.PictureBox();
             this.toolStripLeftBar = new System.Windows.Forms.ToolStrip();
@@ -45,12 +45,17 @@
             this.toolStripLabelBrushSize = new System.Windows.Forms.ToolStripLabel();
             this.toolStripComboBoxBrushSize = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabelFont = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripComboBoxFont = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabelFontSize = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripComboBoxFontSize = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripButtonOpenF = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonClear = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonInvert = new System.Windows.Forms.ToolStripButton();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.backgroundWorkerInv = new System.ComponentModel.BackgroundWorker();
+            this.toolStripButtonInvers = new System.Windows.Forms.ToolStripButton();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -175,13 +180,18 @@
             this.toolStripLabelBrushSize,
             this.toolStripComboBoxBrushSize,
             this.toolStripSeparator4,
+            this.toolStripLabelFont,
+            this.toolStripComboBoxFont,
+            this.toolStripSeparator5,
+            this.toolStripLabelFontSize,
+            this.toolStripComboBoxFontSize,
             this.toolStripButtonOpenF,
             this.toolStripButtonSave,
             this.toolStripButtonClear,
-            this.toolStripButtonInvert});
+            this.toolStripButtonInvers});
             this.toolStripTop.Location = new System.Drawing.Point(3, 0);
             this.toolStripTop.Name = "toolStripTop";
-            this.toolStripTop.Size = new System.Drawing.Size(667, 25);
+            this.toolStripTop.Size = new System.Drawing.Size(959, 25);
             this.toolStripTop.TabIndex = 1;
             // 
             // toolStripButtonColor
@@ -238,6 +248,33 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripLabelFont
+            // 
+            this.toolStripLabelFont.Name = "toolStripLabelFont";
+            this.toolStripLabelFont.Size = new System.Drawing.Size(31, 22);
+            this.toolStripLabelFont.Text = "Font";
+            // 
+            // toolStripComboBoxFont
+            // 
+            this.toolStripComboBoxFont.Name = "toolStripComboBoxFont";
+            this.toolStripComboBoxFont.Size = new System.Drawing.Size(121, 25);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabelFontSize
+            // 
+            this.toolStripLabelFontSize.Name = "toolStripLabelFontSize";
+            this.toolStripLabelFontSize.Size = new System.Drawing.Size(54, 22);
+            this.toolStripLabelFontSize.Text = "Font Size";
+            // 
+            // toolStripComboBoxFontSize
+            // 
+            this.toolStripComboBoxFontSize.Name = "toolStripComboBoxFontSize";
+            this.toolStripComboBoxFontSize.Size = new System.Drawing.Size(75, 25);
+            // 
             // toolStripButtonOpenF
             // 
             this.toolStripButtonOpenF.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOpenF.Image")));
@@ -268,17 +305,16 @@
             this.toolStripButtonClear.ToolTipText = "Clear";
             this.toolStripButtonClear.Click += new System.EventHandler(this.toolStripButtonClear_Click);
             // 
-            // toolStripButtonInvert
+            // toolStripButtonInvers
             // 
-            this.toolStripButtonInvert.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonInvert.Image")));
-            this.toolStripButtonInvert.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonInvert.Name = "toolStripButtonInvert";
-            this.toolStripButtonInvert.Size = new System.Drawing.Size(57, 22);
-            this.toolStripButtonInvert.Text = "Invert";
-            this.toolStripButtonInvert.ToolTipText = "Invert";
-            this.toolStripButtonInvert.Click += new System.EventHandler(this.toolStripButtonInvers_Click);
+            this.toolStripButtonInvers.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonInvers.Image")));
+            this.toolStripButtonInvers.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonInvers.Name = "toolStripButtonInvers";
+            this.toolStripButtonInvers.Size = new System.Drawing.Size(58, 22);
+            this.toolStripButtonInvers.Text = "Invers";
+            this.toolStripButtonInvers.Click += new System.EventHandler(this.toolStripButtonInvers_Click);
             // 
-            // FormMain
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -286,7 +322,7 @@
             this.Controls.Add(this.toolStripContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
-            this.Name = "FormMain";
+            this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Simple Graphic Editor v1.0";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -318,19 +354,24 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonLine;
         private System.Windows.Forms.ToolStrip toolStripTop;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBoxFont;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBoxFontSize;
         private System.Windows.Forms.ToolStripLabel toolStripLabelBrushSize;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxBrushSize;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelFont;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelFontSize;
         private System.Windows.Forms.ToolStripButton toolStripButtonColor;
         private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.PictureBox pictureBoxMain;
         private System.Windows.Forms.ToolStripButton toolStripButtonEraser;
         private System.Windows.Forms.ToolStripButton toolStripButtonOpenF;
         private System.Windows.Forms.ToolStripButton toolStripButtonSave;
         private System.Windows.Forms.ToolStripButton toolStripButtonClear;
         private System.Windows.Forms.ToolStripButton toolStripButtonBackColor;
-        private System.Windows.Forms.ToolStripButton toolStripButtonInvert;
-        private System.ComponentModel.BackgroundWorker backgroundWorkerInv;
-        public System.Windows.Forms.PictureBox pictureBoxMain;
+        private System.Windows.Forms.ToolStripButton toolStripButtonInvers;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
