@@ -9,20 +9,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Threading;
 
 namespace GraphicEditor
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         Color color = Color.Black;
+        Color colorBack = Color.White;
         bool draw = false;
         int x, y, lx, ly = 0;
         ToolItems currItem;
         Int32 solidSize = 3;
-        public Bitmap bmp, inv;
-        Color colorBack = Color.White;
+        public Bitmap workingPict;        
 
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
         }
@@ -30,20 +31,15 @@ namespace GraphicEditor
         private void Form1_Load(object sender, EventArgs e)
         {
             pictureBoxMain.Image = new Bitmap(pictureBoxMain.Width, pictureBoxMain.Height);
-
-            FontFamily[] family = FontFamily.Families;
-            foreach (FontFamily font in family)
-            {
-                toolStripComboBoxFont.Items.Add(font.GetName(1).ToString());
-            }
         }
 
-
+        //Перечисление набора инструментов
         public enum ToolItems
         {
             Line, Ellipse, Rectangle, Fill, Pen, Eraser
         }
 
+        //Обработчики кнопок инструментов
         private void toolStripButtonPen_Click(object sender, EventArgs e)
         {
             currItem = ToolItems.Pen;
@@ -69,7 +65,7 @@ namespace GraphicEditor
             currItem = ToolItems.Eraser;
         }
 
-
+        //Рисование, 3 метода 
         private void pictureBoxMain_MouseDown(object sender, MouseEventArgs e)
         {
            draw = true;
@@ -84,26 +80,27 @@ namespace GraphicEditor
             ly = e.Y;
             if(draw == false)
             {
-                bmp = new Bitmap(pictureBoxMain.Image);
-                Graphics g = Graphics.FromImage(bmp);
-                switch (currItem)
+                workingPict = new Bitmap(pictureBoxMain.Image);
+                using (Graphics g = Graphics.FromImage(workingPict))
                 {
-                    case ToolItems.Rectangle:
-                        Rectangle rec = new Rectangle(x, y, e.X - x, e.Y - y);
-                        g.DrawRectangle(new Pen(color, solidSize), rec);
-                        g.FillRectangle(new SolidBrush(colorBack), rec);
-                        break;
-                    case ToolItems.Ellipse:
-                        Rectangle r = new Rectangle(x, y, e.X - x, e.Y - y);
-                        g.DrawEllipse(new Pen(color, solidSize), r);
-                        g.FillEllipse(new SolidBrush(colorBack), r);
-                        break;
-                    case ToolItems.Line:
-                        g.DrawLine(new Pen(color, solidSize), new Point(x, y), new Point(lx, ly));
-                        break;
+                    switch (currItem)
+                    {
+                        case ToolItems.Rectangle:
+                            Rectangle rec = new Rectangle(x, y, e.X - x, e.Y - y);
+                            g.DrawRectangle(new Pen(color, solidSize), rec);
+                            g.FillRectangle(new SolidBrush(colorBack), rec);
+                            break;
+                        case ToolItems.Ellipse:
+                            Rectangle r = new Rectangle(x, y, e.X - x, e.Y - y);
+                            g.DrawEllipse(new Pen(color, solidSize), r);
+                            g.FillEllipse(new SolidBrush(colorBack), r);
+                            break;
+                        case ToolItems.Line:
+                            g.DrawLine(new Pen(color, solidSize), new Point(x, y), new Point(lx, ly));
+                            break;
+                    }
+                    pictureBoxMain.Image = workingPict;
                 }
-                pictureBoxMain.Image = bmp;
-                g.Dispose();
             }
         }
         
@@ -111,8 +108,8 @@ namespace GraphicEditor
         {
             if (draw)
             {
-               
-                if (toolStripComboBoxBrushSize.Text != "")
+
+                if (toolStripComboBoxBrushSize.Text != string.Empty)
                 {
                     solidSize = Convert.ToInt32(toolStripComboBoxBrushSize.Text);
                 }
@@ -121,24 +118,26 @@ namespace GraphicEditor
                     solidSize = 3;
                 }
 
-                bmp = new Bitmap(pictureBoxMain.Image);
-                Graphics g = Graphics.FromImage(bmp);
-
-                switch (currItem)
+                workingPict = new Bitmap(pictureBoxMain.Image);
+                using (Graphics g = Graphics.FromImage(workingPict))
                 {
-                    case ToolItems.Pen:                     
-                        g.FillEllipse(new SolidBrush(color), e.X - x + x, e.Y - y + y, solidSize, solidSize);
-                        break;
-                    case ToolItems.Eraser:
-                        g.FillEllipse(new SolidBrush(pictureBoxMain.BackColor), e.X - x + x, e.Y - y + y, solidSize, solidSize);
-                        break;
+
+
+                    switch (currItem)
+                    {
+                        case ToolItems.Pen:
+                            g.FillEllipse(new SolidBrush(color), e.X - x + x, e.Y - y + y, solidSize, solidSize);
+                            break;
+                        case ToolItems.Eraser:
+                            g.FillEllipse(new SolidBrush(pictureBoxMain.BackColor), e.X - x + x, e.Y - y + y, solidSize, solidSize);
+                            break;
+                    }
+                    pictureBoxMain.Image = workingPict;
                 }
-                pictureBoxMain.Image = bmp;
-                g.Dispose();
             }
         }
 
-         
+        //Кнопка Открытие файла 
         private void toolStripButtonOpenF_Click(object sender, EventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
@@ -146,18 +145,10 @@ namespace GraphicEditor
             if (op.ShowDialog() == DialogResult.OK)
             {
                 pictureBoxMain.ImageLocation = op.FileName;
-                //pictureBoxMain.Image = Bitmap.FromFile(op.FileName);
             }
         }
 
-        private void toolStripButtonBackColor_Click(object sender, EventArgs e)
-        {
-            if (colorDialog.ShowDialog() == DialogResult.OK)
-            {
-                colorBack = colorDialog.Color;
-            }
-        }
-
+        //Кнопка Сохранение файла
         private void toolStripButtonSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog sf = new SaveFileDialog();
@@ -179,19 +170,28 @@ namespace GraphicEditor
             }
         }
 
+        //Кнопка инверсии рисунка
         private void toolStripButtonInvers_Click(object sender, EventArgs e)
         {
-            bmp = new Bitmap(pictureBoxMain.Image);
-            FormProgress fp = new FormProgress(bmp);
+            workingPict = new Bitmap(pictureBoxMain.Image);
+            FormProgress fp = new FormProgress(workingPict, this);
             fp.Show();
-            //pictureBoxMain.Image = bmp;
         }
 
+        //Кнопка очистки полотна
         private void toolStripButtonClear_Click(object sender, EventArgs e)
         {
             pictureBoxMain.Image = new Bitmap(pictureBoxMain.Width, pictureBoxMain.Height);
         }
 
+        //Обработчки выбора цветов
+        private void toolStripButtonBackColor_Click(object sender, EventArgs e)
+        {
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                colorBack = colorDialog.Color;
+            }
+        }
 
         private void toolStripButtonColor_Click(object sender, EventArgs e)
         {
