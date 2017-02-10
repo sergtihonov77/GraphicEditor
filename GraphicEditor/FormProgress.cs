@@ -85,36 +85,19 @@ namespace GraphicEditor
                 MessageBox.Show("Process had been completed.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 mainForm.pictureBoxMain.Image = (Bitmap)e.Result;
             }
-            this.Close();
+            Close();
         }
 
         //Обработка отмены инверсии
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            if (this.backgroundWorkerInvert.IsBusy && backgroundWorkerInvert.WorkerSupportsCancellation)
+            if (backgroundWorkerInvert.IsBusy && backgroundWorkerInvert.WorkerSupportsCancellation)
             {
-                this.backgroundWorkerInvert.CancelAsync();
+                backgroundWorkerInvert.CancelAsync();
             }
-            this.Close();
+            Close();
         }
 
-        //Инверсия в методе
-        /*public Bitmap Invert(Bitmap bitmap)
-        {
-            int x;
-            int y;
-            for (x = 0; x <= bitmap.Width - 1; x++)
-            {
-                for (y = 0; y <= bitmap.Height - 1; y += 1)
-                {
-                    Color oldColor = bitmap.GetPixel(x, y);
-                    Color newColor;
-                    newColor = Color.FromArgb(oldColor.A, 255 - oldColor.R, 255 - oldColor.G, 255 - oldColor.B);
-                    bitmap.SetPixel(x, y, newColor);
-                }
-            }
-            return bitmap;
-        }*/
     }
 
 }

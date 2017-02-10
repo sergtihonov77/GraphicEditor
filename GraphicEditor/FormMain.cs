@@ -15,28 +15,48 @@ namespace GraphicEditor
 {
     public partial class FormMain : Form
     {
-        Color color = Color.Black;
-        Color colorBack = Color.White;
-        bool draw = false;
-        int x, y, lx, ly = 0;
+        Color color;
+        Color colorBack;
+        bool draw;
+        int x, y, lx, ly;
         ToolItems currItem;
-        Int32 solidSize = 3;
-        public Bitmap workingPict;        
+        int solidSize;
+        public Bitmap workingPict;       
 
         public FormMain()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void FormMain_Load(object sender, EventArgs e)
         {
             pictureBoxMain.Image = new Bitmap(pictureBoxMain.Width, pictureBoxMain.Height);
+            color = Color.Black;
+            colorBack = Color.White;
+            draw = false;
+            x = 0; y = 0; lx = 0; ly = 0;
+            solidSize = 5;
+
+            workingPict = new Bitmap(pictureBoxMain.Image);
+            toolStripComboBoxBrushSize.Text = "5";
+            toolStripComboBoxFontStyle.Text = "Regular";
+            toolStripComboBoxFontSize.Text = "25";
+            toolStripComboBoxFont.Text = "Arial";
+
+            FontFamily[] fonts = FontFamily.Families;
+
+            foreach (FontFamily f in fonts)
+            {
+                toolStripComboBoxFont.Items.Add(f.GetName(1).ToString());
+            }
+
+
         }
 
         //Перечисление набора инструментов
         public enum ToolItems
         {
-            Line, Ellipse, Rectangle, Fill, Pen, Eraser
+            Line, Ellipse, Rectangle, Fill, Pen, Eraser, Text
         }
 
         //Обработчики кнопок инструментов
@@ -65,6 +85,11 @@ namespace GraphicEditor
             currItem = ToolItems.Eraser;
         }
 
+        private void toolStripButtonText_Click(object sender, EventArgs e)
+        {
+            currItem = ToolItems.Text;
+        }
+
         //Рисование, 3 метода 
         private void pictureBoxMain_MouseDown(object sender, MouseEventArgs e)
         {
@@ -80,7 +105,7 @@ namespace GraphicEditor
             ly = e.Y;
             if(draw == false)
             {
-                workingPict = new Bitmap(pictureBoxMain.Image);
+                workingPict = (Bitmap)pictureBoxMain.Image;
                 using (Graphics g = Graphics.FromImage(workingPict))
                 {
                     switch (currItem)
@@ -98,6 +123,45 @@ namespace GraphicEditor
                         case ToolItems.Line:
                             g.DrawLine(new Pen(color, solidSize), new Point(x, y), new Point(lx, ly));
                             break;
+                        case ToolItems.Text:
+
+                            if (toolStripTextBoxYourText.Text != string.Empty && toolStripComboBoxFontStyle.Text == "Strikeout")
+                            {
+                                g.DrawString(toolStripTextBoxYourText.Text,
+                                    new Font(toolStripComboBoxFont.Text, Convert.ToInt32(toolStripComboBoxFontSize.Text), FontStyle.Strikeout),
+                                    new SolidBrush(color), new PointF(x, y));
+                            }
+
+                            if (toolStripTextBoxYourText.Text != string.Empty && toolStripComboBoxFontStyle.Text == "Underline")
+                            {
+                                g.DrawString(toolStripTextBoxYourText.Text,
+                                    new Font(toolStripComboBoxFont.Text, Convert.ToInt32(toolStripComboBoxFontSize.Text), FontStyle.Underline),
+                                    new SolidBrush(color), new PointF(x, y));
+                            }
+
+                            if (toolStripTextBoxYourText.Text != string.Empty && toolStripComboBoxFontStyle.Text == "Bold")
+                            {
+                                g.DrawString(toolStripTextBoxYourText.Text, 
+                                    new Font(toolStripComboBoxFont.Text, Convert.ToInt32(toolStripComboBoxFontSize.Text),FontStyle.Bold ), 
+                                    new SolidBrush(color), new PointF(x,y));
+                            }
+
+                            if (toolStripTextBoxYourText.Text != string.Empty && toolStripComboBoxFontStyle.Text == "Italic")
+                            {
+                                g.DrawString(toolStripTextBoxYourText.Text,
+                                    new Font(toolStripComboBoxFont.Text, Convert.ToInt32(toolStripComboBoxFontSize.Text), FontStyle.Italic),
+                                    new SolidBrush(color), new PointF(x, y));
+                            }
+
+                            if (toolStripTextBoxYourText.Text != string.Empty && toolStripComboBoxFontStyle.Text == "Regular")
+                            {
+                                g.DrawString(toolStripTextBoxYourText.Text,
+                                    new Font(toolStripComboBoxFont.Text, Convert.ToInt32(toolStripComboBoxFontSize.Text), FontStyle.Regular),
+                                    new SolidBrush(color), new PointF(x, y));
+                            }
+                            break;
+
+                            
                     }
                     pictureBoxMain.Image = workingPict;
                 }
@@ -118,7 +182,7 @@ namespace GraphicEditor
                     solidSize = 3;
                 }
 
-                workingPict = new Bitmap(pictureBoxMain.Image);
+                workingPict = (Bitmap)pictureBoxMain.Image;
                 using (Graphics g = Graphics.FromImage(workingPict))
                 {
 
@@ -133,7 +197,8 @@ namespace GraphicEditor
                             break;
                     }
                     pictureBoxMain.Image = workingPict;
-                }
+                    
+                }    
             }
         }
 
@@ -177,6 +242,7 @@ namespace GraphicEditor
             FormProgress fp = new FormProgress(workingPict, this);
             fp.Show();
         }
+
 
         //Кнопка очистки полотна
         private void toolStripButtonClear_Click(object sender, EventArgs e)

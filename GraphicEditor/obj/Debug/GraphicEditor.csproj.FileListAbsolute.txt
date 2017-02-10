@@ -18,3 +18,16 @@ D:\Programming\С#\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.Propertie
 D:\Programming\С#\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.csproj.GenerateResource.Cache
 D:\Programming\С#\GraphicEditor\GraphicEditor\bin\Debug\GraphicEditor.exe
 D:\Programming\С#\GraphicEditor\GraphicEditor\bin\Debug\GraphicEditor.pdb
+E:\Проэкты и учеба\С#\My\GraphicEditor\GraphicEditor\bin\Debug\GraphicEditor.exe.config
+E:\Проэкты и учеба\С#\My\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.exe
+E:\Проэкты и учеба\С#\My\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.pdb
+E:\Проэкты и учеба\С#\My\GraphicEditor\GraphicEditor\bin\Debug\GraphicEditor.exe
+E:\Проэкты и учеба\С#\My\GraphicEditor\GraphicEditor\bin\Debug\GraphicEditor.pdb
+E:\Проэкты и учеба\С#\My\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.csprojResolveAssemblyReference.cache
+E:\Проэкты и учеба\С#\My\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.FormMain.resources
+E:\Проэкты и учеба\С#\My\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.FormProgress.resources
+E:\Проэкты и учеба\С#\My\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.Properties.Resources.resources
+E:\Проэкты и учеба\С#\My\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.csproj.GenerateResource.Cache
+E:\Проэкты и учеба\GraphicEditor\GraphicEditor\bin\Debug\GraphicEditor.exe.config
+E:\Проэкты и учеба\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.exe
+E:\Проэкты и учеба\GraphicEditor\GraphicEditor\obj\Debug\GraphicEditor.pdb
